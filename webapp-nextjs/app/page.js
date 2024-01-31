@@ -12,7 +12,6 @@ function Page() {
   const [amount, setAmount] = useState("");
   const [connected, setConnected] = useState(false);
 
-  // Function to connect to MetaMask and initialize contract
   const connectToMetaMask = async () => {
     try {
       if (
@@ -48,7 +47,6 @@ function Page() {
     }
   };
 
-  // Function to handle the airdrop
   const handleAirdrop = async () => {
     try {
       if (!contract) {
@@ -72,24 +70,20 @@ function Page() {
   return (
     <div className="h-screen flex justify-center items-center bg-black text-white">
       <main className="flex flex-col items-center gap-5">
-        <div>
-          {connected ? (
-            <button
-              className="bg-green-500 text-white font-bold py-2 px-4 rounded cursor-not-allowed"
-              disabled
-            >
-              Connected
-            </button>
-          ) : (
-            <button
-              onClick={connectToMetaMask}
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            >
-              Connect Wallet
-            </button>
-          )}
-        </div>
         <p className="text-blue-500">Connect Your Wallet</p>
+        <div>
+          <button
+            className={
+              connected
+                ? "bg-green-500 text-white font-bold py-2 px-4 rounded cursor-not-allowed"
+                : "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            }
+            onClick={connected ? null : connectToMetaMask}
+            disabled={connected ? true : false}
+          >
+            {connected ? "Connected" : "Connect Wallet"}
+          </button>
+        </div>
         <div className="flex gap-5">
           <input
             type="text"
